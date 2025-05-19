@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pridať príchuť</title>
+  <link rel="stylesheet" href="style/style.css">
+  <style>
+    .deletable-list ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .deletable-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .deletable-list button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pridať novú príchuť</h1>
+  </header>
+
+  <div class="container">
+    <form id="addFlavorForm">
+      <label for="category">Kategória:</label>
+      <select id="category" required>
+        <option value="">-- Vyber kategóriu --</option>
+        <option value="sladke">Sladké</option>
+        <option value="svieze">Svieže</option>
+        <option value="dezertove">Dezertové</option>
+        <option value="koreniste">Korenisté</option>
+        <option value="tropicke">Tropické</option>
+        <option value="kvetinove">Kvetinové</option>
+      </select>
+
+      <label for="flavor">Názov príchute:</label>
+      <input type="text" id="flavor" required placeholder="Napr. Blueberry Mint">
+
+      <button type="submit">Pridať príchuť</button>
+    </form>
+    <p id="confirmation" style="display: none; color: var(--accent-color); margin-top: 10px;">Príchuť bola pridaná!</p>
+
+    <hr style="margin: 30px 0;">
+
+    <h2>Uložené príchute podľa kategórie</h2>
+    <div id="editable-lists" class="deletable-list"></div>
+  </div>
+
+  <script>
+    const categories = {
+      sladke: 'Sladké',
+      svieze: 'Svieže',
+      dezertove: 'Dezertové',
+      koreniste: 'Korenisté',
+      tropicke: 'Tropické',
+      kvetinove: 'Kvetinové'
+    };
+
+    // Pridanie príchute
+    document.getElementById('addFlavorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const category = document.getElementById('category').value;
+      const flavor = document.getElementById('flavor').value.trim();
+
+      if (!category || !flavor) return;
+
+      const key = `flavors_${category}`;
+      const list = JSON.parse(localStorage.getItem(key)) || [];
+      list.push(flavor);
+      localStorage.setItem(key, JSON.stringify(list));
+
+      document.getElementById('flavor').value = '';
+      document.getElementById('category').value = '';
+      document.getElementById('confirmation').style.display = 'block';
+
+      setTimeout(() => {
+        document.getElementById('confirmation').style.display = 'none';
+      }, 2000);
+
+      renderFlavorLists(); // refreshni zoznam
+    });
+
+    // Zobrazenie príchutí s možnosťou zmazania
+    function renderFlavorLists() {
+      const container = document.getElementById('editable-lists');
+      container.innerHTML = '';
+
+      Object.entries(categories).forEach(([key, name]) => {
+        const data = JSON.parse(localStorage.getItem(`flavors_${key}`)) || [];
+        if (data.length === 0) return;
+
+        const section = document.createElement('div');
+        const heading = document.createElement('h3');
+        heading.textContent = name;
+        section.appendChild(heading);
+
+        const ul = document.createElement('ul');
+        data.forEach((flavor, index) => {
+          const li = document.createElement('li');
+          li.textContent = flavor;
+
+          const btn = document.createElement('button');
+          btn.textContent = '🗑️';
+          btn.title = 'Zmazať';
+          btn.onclick = () => {
+            data.splice(index, 1);
+            localStorage.setItem(`flavors_${key}`, JSON.stringify(data));
+            renderFlavorLists();
+          };
+
+          li.appendChild(btn);
+          ul.appendChild(li);
+        });
+
+        section.appendChild(ul);
+        container.appendChild(section);
+      });
+    }
+
+    // Inicializuj výpis
+    renderFlavorLists();
+  </script>
+</body>
+</html>

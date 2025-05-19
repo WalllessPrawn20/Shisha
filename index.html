@@ -98,12 +98,42 @@
     </div>
 
   </div>
+  <div class="add-link">
+    <a href="add.html">➕ Pridať novú príchuť</a>
+  </div>
 
   <script>
     function toggleCategory(category) {
       const el = document.getElementById('list-' + category);
       el.classList.toggle('open');
     }
+  </script>
+  <script>
+    function toggleCategory(category) {
+      const el = document.getElementById('list-' + category);
+      el.classList.toggle('open');
+    }
+
+    // Načíta príchute z localStorage a pridá ich do príslušných zoznamov
+    const categories = [
+      'sladke', 'svieze', 'dezertove',
+      'koreniste', 'tropicke', 'kvetinove'
+    ];
+
+    categories.forEach(cat => {
+      const stored = localStorage.getItem('flavors_' + cat);
+      if (!stored) return;
+
+      const flavors = JSON.parse(stored);
+      const list = document.querySelector('#list-' + cat + ' ul');
+      if (!list) return; // preskočí, ak kategória nie je zobrazená
+
+      flavors.forEach(flavor => {
+        const li = document.createElement('li');
+        li.textContent = flavor;
+        list.appendChild(li);
+      });
+    });
   </script>
 </body>
 </html>
