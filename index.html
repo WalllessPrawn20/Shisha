@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shisha Tabaky</title>
+  <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Shishaplace Bojnice</h1>
+  </header>
+
+  <div class="container">
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('sladke')">
+        <div class="category-icon">🍬</div>
+        <div class="category-name">Sladké</div>
+      </div>
+      <div class="flavor-list" id="list-sladke">
+        <ul>
+          <li>Vanilka</li>
+          <li>Jahoda</li>
+          <li>Čučoriedka</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('svieze')">
+        <div class="category-icon">🌿</div>
+        <div class="category-name">Svieže</div>
+      </div>
+      <div class="flavor-list" id="list-svieze">
+        <ul>
+          <li>Mäta</li>
+          <li>Mentol</li>
+          <li>Lesná zmes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('dezertove')">
+        <div class="category-icon">🍰</div>
+        <div class="category-name">Dezertové</div>
+      </div>
+      <div class="flavor-list" id="list-dezertove">
+        <ul>
+          <li>Čokoláda</li>
+          <li>Tiramisu</li>
+          <li>Karamel</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('koreniste')">
+        <div class="category-icon">🌶️</div>
+        <div class="category-name">Korenisté</div>
+      </div>
+      <div class="flavor-list" id="list-koreniste">
+        <ul>
+          <li>Škorica</li>
+          <li>Čaj masala</li>
+          <li>Zázvor</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('tropicke')">
+        <div class="category-icon">🍍</div>
+        <div class="category-name">Tropické</div>
+      </div>
+      <div class="flavor-list" id="list-tropicke">
+        <ul>
+          <li>Ananás</li>
+          <li>Mango</li>
+          <li>Kokos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category" onclick="toggleCategory('kvetinove')">
+        <div class="category-icon">🌸</div>
+        <div class="category-name">Kvetinové</div>
+      </div>
+      <div class="flavor-list" id="list-kvetinove">
+        <ul>
+          <li>Jazmín</li>
+          <li>Levanduľa</li>
+          <li>Ruža</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleCategory(category) {
+      const el = document.getElementById('list-' + category);
+      el.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
