@@ -73,60 +73,51 @@ header h1 {
   font-size: 1.2em;
 }
 
-.flavor-list {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.3s;
-  padding: 0 20px;
+
+
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 1em 0 1em 0;
+  max-width: 190px;
+  position: relative;
 }
 
-.flavor-list.open {
-  max-height: 300px;
-  padding-bottom: 15px;
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
 }
 
-.flavor-list ul {
-  margin-top: 10px;
-  list-style-type: disc;
-  margin-left: 20px;
-  color: #ddd;
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(167, 172, 171);
 }
 
-.flavor-list li {
-  margin-bottom: 6px;
-  font-size: 1em;
-  list-style: none;
+.inputGroup :is(input:focus, input:valid)~label {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: var(--bg-color);
+  z-index: 9999;
 }
 
-.flavor-list li {
-  opacity: 0;
-  transform: translateX(30px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.inputGroup :is(input:focus, input:valid) {
+  border-color: rgb(150, 200, 200);
 }
 
-.flavor-list.open li {
-  opacity: 1;
-  transform: translateX(0);
-}
 
-/* Sekvenčné oneskorenie pre jednotlivé položky */
-.flavor-list.open li:nth-child(1) { transition-delay: 0.05s; }
-.flavor-list.open li:nth-child(2) { transition-delay: 0.10s; }
-.flavor-list.open li:nth-child(3) { transition-delay: 0.15s; }
-.flavor-list.open li:nth-child(4) { transition-delay: 0.20s; }
-.flavor-list.open li:nth-child(5) { transition-delay: 0.25s; }
-.flavor-list.open li:nth-child(6) { transition-delay: 0.30s; }
 
-.flavor-list:not(.open) li {
-  transition-delay: 0s !important;
-}
-
-.add-link a{
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 1.5em;
-  font-weight: bold;
-}
 
 @media (max-width: 600px) {
   header h1 {
