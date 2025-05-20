@@ -32,7 +32,11 @@
 
   <div class="container">
     <form id="addFlavorForm">
-      <label for="category">Kategória:</label>
+      <div class="inputGroup">
+        <input type="text" id="flavor" required="" autocomplete="off">
+        <label for="name">Flavor</label>
+      </div>
+
       <select id="category" required>
         <option value="">-- Vyber kategóriu --</option>
         <option value="sladke">Sladké</option>
@@ -42,20 +46,13 @@
         <option value="tropicke">Tropické</option>
         <option value="kvetinove">Kvetinové</option>
       </select>
-
-      <label for="flavor">Názov príchute:</label>
-      <!-- <input type="text" id="flavor" required placeholder="Napr. Blueberry Mint"> -->
-
-      <div class="inputGroup">
-        <input type="text" id="flavor" required="" autocomplete="off">
-        <label for="name">Flavor</label>
+      <div class="submit-button"></div>
+        <button type="submit" id="submit">Pridať príchuť</button>
       </div>
-
-      <button type="submit">Pridať príchuť</button>
     </form>
     <p id="confirmation" style="display: none; color: var(--accent-color); margin-top: 10px;">Príchuť bola pridaná!</p>
 
-    <hr style="margin: 30px 0;">
+    <hr style="margin-bottom: 30px; margin-top: 0;">
 
     <h2>Uložené príchute podľa kategórie</h2>
     <div id="editable-lists" class="deletable-list"></div>
@@ -134,6 +131,23 @@
 
     // Inicializuj výpis
     renderFlavorLists();
+  </script>
+  <script>
+    const button = document.getElementById('submit');
+  
+    button.addEventListener('click', function() {
+      this.style.transition = 'all 0.3s';
+      this.style.backgroundColor = 'rgb(179, 179, 179)';
+      this.style.color = 'rgb(20, 20, 20)';
+      this.style.border = '2px solid var(--accent-color)';
+      
+      setTimeout(() => {
+        this.style.backgroundColor = '';
+        this.style.transition = '';
+        this.style.color = '';
+        this.style.border = '';
+      }, 1000);
+    });
   </script>
 </body>
 </html>
